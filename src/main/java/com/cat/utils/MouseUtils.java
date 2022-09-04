@@ -122,6 +122,7 @@ public class MouseUtils {
             // 修复JDK8的移动不正确的BUG
             for (int i = 0; i < 6; i++) {
                 robot.mouseMove(mouseMoveX, mouseMoveY);
+                System.out.println("鼠鼠移动到了(" + mouseMoveX + "," +  mouseMoveY + ")");
             }
             // 模拟计算鼠标按下的间隔并且按下鼠标
             int moveTime = (int) (Math.random() * 500 + 200);

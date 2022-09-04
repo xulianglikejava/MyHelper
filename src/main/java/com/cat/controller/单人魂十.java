@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * author: 无境科技-KOL团队-许良
  */
 
-public class StartController {
+public class 单人魂十 {
     MouseUtils mouseUtils = new MouseUtils();
 
     @Test
@@ -22,12 +22,15 @@ public class StartController {
         int count = 0 ;
         /*设置每次打怪需要的最大时间*/
         long playTime = 60000;
+        long waitTime = 60000;
+        long maxCount = 30;
+
         try {
             // 读取判断点信息
             ArrayList<int[]> 挑战的坐标 = mouseUtils.FileToArrayList("单人魂十坐标.txt");
             System.out.println("鼠标坐标读取完毕咯...");
             // 开始刷本
-            while (count <= 1) {
+            while (count <= maxCount) {
                 // 遍历每个设置判断点
                 for (int i = 0; i < 挑战的坐标.size(); i++) {
                     // 点击开始
@@ -37,10 +40,9 @@ public class StartController {
                     /*再点击结算*/
                     mouseUtils.MouseResponse(挑战的坐标.get(i));
                     // 结算完等待开始
-                    Thread.sleep((int) (Math.random() * playTime + 200));
-
-
+                    Thread.sleep((int) (Math.random() * waitTime + 300));
                 }
+                count++;
                 System.out.println("刷了第" + count + "次了" );
             }
         } catch (Exception e) {
