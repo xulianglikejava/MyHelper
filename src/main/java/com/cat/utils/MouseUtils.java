@@ -115,25 +115,23 @@ public class MouseUtils {
         int mouseG = decisionRGB.getGreen();
         int mouseB = decisionRGB.getBlue();
         // 如果真实点与判断点颜色一致,则执行以下操作
-        if (Math.abs(mouseR - decisionR) < 5 && Math.abs(mouseG - decisionG) < 5 && Math.abs(mouseB - decisionB) < 5) {
-            // 计算鼠标位置并且移动到该位置
-            int mouseMoveX = (int) (Math.random() * 35 - 15) + decisionX;
-            int mouseMoveY = (int) (Math.random() * 35 - 15) + decisionY;
-            // 修复JDK8的移动不正确的BUG
-            for (int i = 0; i < 6; i++) {
-                robot.mouseMove(mouseMoveX, mouseMoveY);
-                System.out.println("鼠鼠移动到了(" + mouseMoveX + "," +  mouseMoveY + ")");
-            }
-            // 模拟计算鼠标按下的间隔并且按下鼠标
-            int moveTime = (int) (Math.random() * 500 + 200);
-            int mousePressTime = (int) (Math.random() * 500 + 200);
-            robot.delay(moveTime);
-            robot.mousePress(InputEvent.BUTTON1_MASK);
-            robot.delay(mousePressTime);
-            robot.mouseRelease(InputEvent.BUTTON1_MASK);
-
+      /*  if (Math.abs(mouseR - decisionR) < 5 && Math.abs(mouseG - decisionG) < 5 && Math.abs(mouseB - decisionB) < 5) {
+        }*/
+        // 计算鼠标位置并且移动到该位置
+        int mouseMoveX = (int) (Math.random() * 4 ) + decisionX;
+        int mouseMoveY = (int) (Math.random() * 5 ) + decisionY;
+        // 修复JDK8的移动不正确的BUG
+        for (int i = 0; i < 6; i++) {
+            robot.mouseMove(mouseMoveX, mouseMoveY);
+            System.out.println("鼠鼠移动到了(" + mouseMoveX + "," +  mouseMoveY + ")");
         }
-
+        // 模拟计算鼠标按下的间隔并且按下鼠标
+        int moveTime = (int) (Math.random() * 500 + 200);
+        int mousePressTime = (int) (Math.random() * 500 + 200);
+        robot.delay(moveTime);
+        robot.mousePress(InputEvent.BUTTON1_MASK);
+        robot.delay(mousePressTime);
+        robot.mouseRelease(InputEvent.BUTTON1_MASK);
     }
 
 
