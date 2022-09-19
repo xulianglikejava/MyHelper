@@ -126,8 +126,8 @@ public class MouseUtils {
             System.out.println("鼠鼠移动到了(" + mouseMoveX + "," +  mouseMoveY + ")");
         }
         // 模拟计算鼠标按下的间隔并且按下鼠标
-        int moveTime = (int) (Math.random() * 500 + 200);
-        int mousePressTime = (int) (Math.random() * 500 + 200);
+        int moveTime = (int) (Math.random() * 500 + 400);
+        int mousePressTime = (int) (Math.random() * 500 + 210);
         robot.delay(moveTime);
         robot.mousePress(InputEvent.BUTTON1_MASK);
         robot.delay(mousePressTime);
