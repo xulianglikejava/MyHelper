@@ -1,5 +1,6 @@
 package com.cat.controller;
 
+import com.cat.services.MessageService;
 import com.cat.utils.MouseUtils;
 import org.junit.Test;
 
@@ -16,19 +17,19 @@ import java.util.Random;
 public class 单人999 {
     MouseUtils mouseUtils = new MouseUtils();
 
+    MessageService messageService = new MessageService();
+
     @Test
-    public void 开始999() {
+    public void 开始999() throws Exception {
 
         /*设置每次打怪需要的最大时间*/
         long playTime = 35000;
         long waitBigTime = 3000;
         long waitSmallTime = 1000;
-        long maxCount = 13;
-
+        long maxCount = 1;
 
         System.out.println("开始启动小助手...");
         System.out.println("开始刷999咯...");
-
 
         try {
             // 读取判断点信息
@@ -39,9 +40,6 @@ public class 单人999 {
 
             for (int i = 0; i < maxCount; i++) {
 
-
-
-                // 点击开始
                 System.out.println("-----点击开始第" + i+1 + "次-----");
                 mouseUtils.MouseResponse(挑战的坐标.get(0));
                 System.out.println("-----等打完-----");
@@ -56,13 +54,13 @@ public class 单人999 {
                 mouseUtils.MouseResponse(单人结算999坐标.get(data));
                 System.out.println("----等待跳转到开始挑战页面----");
                 Thread.sleep((int) (Math.random() * waitSmallTime + 300));
-
                 System.out.println("----刷了第" + i+1 + "次了----" );
-
             }
-
+            MessageService.sendMsg("----刷了第" + maxCount+1 + "次了----");
         } catch (Exception e) {
+            MessageService.sendMsg("刷999出现问题了,赶快看看");
             e.printStackTrace();
+
         }
     }
 

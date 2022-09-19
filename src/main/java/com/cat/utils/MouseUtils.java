@@ -1,5 +1,8 @@
 package com.cat.utils;
 
+import com.sun.jna.platform.win32.User32;
+import com.sun.jna.platform.win32.WinDef;
+
 import java.awt.*;
 import java.awt.event.InputEvent;
 import java.io.BufferedReader;
@@ -133,6 +136,77 @@ public class MouseUtils {
         robot.delay(mousePressTime);
         robot.mouseRelease(InputEvent.BUTTON1_MASK);
     }
+
+
+    /**
+     * 本方法可以向后台进程窗口发送鼠标事件从而实现后台操作游戏
+     *
+     * @param gameProcess   - 指定后台进程窗口
+     * @param mouseMessages - 鼠标事件描述
+     */
+    /*public static void MouseClick(HWND hwnd, java.util.List<Work> mouseMessages) {
+
+        for (int i = 0; i < mouseMessages.size(); i++) {
+            // 解析鼠标坐标参数,低位为X轴,高位为Y轴坐标
+            String X = Integer.toHexString(mouseMessages.get(i).getMouseX());
+            String Y = Integer.toHexString(mouseMessages.get(i).getMouseY());
+            while (X.length() < 4) {
+                X = "0" + X;
+            }
+            while (Y.length() < 4) {
+                Y = "0" + Y;
+            }
+            Integer in = Integer.valueOf(Y + X, 16);
+            LPARAM lPARAM = new LPARAM(in);
+            int moveTime = (int) (Math.random() * 400 + 300);
+            int mousePressTime = (int) (Math.random() * 500 + 400);
+            try {
+                // 模拟计算鼠标按下的间隔并且按下鼠标
+                Thread.sleep(moveTime);
+                User32.INSTANCE.PostMessage(hwnd, 513, new WPARAM(513), lPARAM);
+                Thread.sleep(mousePressTime);
+                User32.INSTANCE.PostMessage(hwnd, 514, new WPARAM(514), lPARAM);
+
+            } catch (InterruptedException e) {
+
+                e.printStackTrace();
+
+            }
+
+        }
+
+    }*/
+
+    /**
+     * 本方法会根据指定的游戏标题和游戏文件路径,开启游戏窗口并且移动到指定的位置.
+     *
+     * @param gameTitle  - 指定的游戏标题
+     * @param gamePath   - 指定的游戏文件路径
+     * @param gameX      - 指定的游戏的X轴位置
+     * @param gameY      - 指定的游戏的Y轴位置
+     * @param gameWidth  - 指定的游戏的窗口宽度
+     * @param gameHeight - 指定的游戏的窗口高度
+     *
+     * @throws Exception- 如果指定的游戏路径错误 或者 发生 I/O 错误 则抛出异常
+     */
+    public static void moveGameWindow(String gameTitle, String gamePath, int gameX, int gameY, int gameWidth, int gameHeight) throws Exception {
+
+        // 获取指定顶级窗口的句柄
+        WinDef.HWND hwnd = User32.INSTANCE.FindWindow(null, gameTitle);
+        if (hwnd == null) {
+            // 如果没有找到游戏窗口就启动游戏窗口
+            Runtime.getRuntime().exec("cmd /c " + gamePath);
+            return;
+        }
+        // 设置指定窗口的显示状态
+        User32.INSTANCE.ShowWindow(hwnd, 1);
+        // 激活指定窗口
+        User32.INSTANCE.SetForegroundWindow(hwnd);
+        // 获取指定窗口的位置
+        User32.INSTANCE.MoveWindow(hwnd, gameX, gameY, gameWidth, gameHeight, true);
+
+    }
+
 
 
 
